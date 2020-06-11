@@ -12,11 +12,12 @@ Joint::Joint()
 
 }
 
-Joint::Joint(const QString _jointname, const QVector3D _coordiantes, const QQuaternion _quaternion)
+Joint::Joint(const QString _jointname, const QVector3D _coordiantes, const QQuaternion _quaternion , const QString _jointStatus)
 {
     this->jointName = _jointname;
     this->coordinates = _coordiantes;
     this->quaternion = _quaternion;
+    this->jointStatus = _jointStatus;
 }
 
 
@@ -34,6 +35,11 @@ QQuaternion Joint::getQuaternion()
 QString Joint::getName()
 {
     return jointName;
+}
+
+QString Joint::getStatus()
+{
+    return jointStatus;
 }
 
 

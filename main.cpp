@@ -174,6 +174,7 @@ QVector<QVector<Joint>> createScene()
     Skeleton *sk = new Skeleton("/Users/chichaouiomar/Documents/Projet2A/Mskeleton.csv.txt");
     QVector<QVector3D> vectors = sk->getVectors();
     QVector<QString> names = sk->getNames();
+    QVector<QString> status = sk->getStatus();
     QVector<QQuaternion> quaternions = sk->getQuaternions();
     QVector<float> timesImported = sk->getTimes();
 
@@ -187,6 +188,7 @@ QVector<QVector<Joint>> createScene()
     QVector3D jointCoordinates = QVector3D(0,0,0);
 
     QString jointName ="";
+    QString jointStatus = "";
 
     QParallelAnimationGroup *group = new QParallelAnimationGroup;
     int vartest = 0;
@@ -262,139 +264,140 @@ QVector<QVector<Joint>> createScene()
         {
             jointCoordinates = vectors.at(p);
             jointName = names.at(p);
+            jointStatus = status.at(p);
             QQuaternion jointQuaternion = quaternions.at(p);
 
             if(jointName == "SpineBase"){
-                jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                 spinBaseJoint.append(*jtest);
 
             }
             if(jointName == "SpineMid")
             {
-                jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                 spinMidJoint.append(*jtest);
             }
 
             if(jointName == "Neck")
             {
-                  jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                   jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                   neckJoint.append(*jtest);
             }
             if(jointName == "Head")
             {
-                  jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                   jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                   headJoint.append(*jtest);
             }
             if(jointName == "ShoulderLeft")
             {
-                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                  jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                  shoulderLeftJoint.append(*jtest);
             }
 
             if(jointName == "ElbowLeft")
             {
-                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                  jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                  elbowLeftJoint.append(*jtest);
             }
             if(jointName == "WristLeft")
             {
-                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                  jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                  wristLeftJoint.append(*jtest);
             }
 
             if(jointName == "HandLeft")
             {
-                jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                 handLeftJoint.append(*jtest);
             }
             if(jointName == "ShoulderRight")
             {
-                jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                 shoulderRightJoint.append(*jtest);
             }
             if(jointName == "ElbowRight")
             {
-                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                  jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                  elbowRightJoint.append(*jtest);
             }
 
             if(jointName == "WristRight")
             {
-                jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                 wristRightJoint.append(*jtest);
             }
             if(jointName == "HandRight")
             {
-                jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                 handRightJoint.append(*jtest);
             }
             if(jointName == "HipLeft")
             {
-                jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                 hipLeftJoint.append(*jtest);
 
             }
             if(jointName == "KneeLeft")
             {
-               jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+              jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                kneeLeftJoint.append(*jtest);
             }
             if(jointName == "AnkleLeft")
             {
-                jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                 ankleLLeftJoint.append(*jtest);
             }
             if(jointName == "FootLeft")
             {
-               jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                footLeftJoint.append(*jtest);
             }
 
             if(jointName == "HipRight")
             {
-                jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                 hipRightJoint.append(*jtest);
 
             }
             if(jointName == "KneeRight")
             {
-               jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                kneeRightJoint.append(*jtest);
             }
             if(jointName == "AnkleRight")
             {
-                jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                 ankleLRightJoint.append(*jtest);
             }
             if(jointName == "FootRight")
             {
-               jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                footRightJoint.append(*jtest);
             }
 
             if(jointName == "SpineShoulder")
             {
-               jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                spineShoulderJoint.append(*jtest);
             }
             if(jointName == "HandTipLeft")
             {
-                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                  jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                  handTipLeftJoint.append(*jtest);
             }
             if(jointName == "ThumbLeft")
             {
-                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                  jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                  thumbLeftJoint.append(*jtest);
             }
             if(jointName == "HandTipRight")
             {
-                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                  jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                  handTipRightJoing.append(*jtest);
             }
             if(jointName == "ThumbRight")
             {
-                 jtest = new Joint(jointName,jointCoordinates, jointQuaternion);
+                  jtest = new Joint(jointName,jointCoordinates, jointQuaternion , jointStatus);
                  thumbRightJoing.append(*jtest);
             }
             p++;
