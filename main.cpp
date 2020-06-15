@@ -90,6 +90,9 @@
 #include"joint.h"
 #include"mytimer.h"
 #include"skeletonbuilder.h"
+#include"skeletonview.h"
+
+#include <QApplication>
 
 float value = -2;
 float divideValue = 6 ;
@@ -637,68 +640,39 @@ QVector<QVector<Joint>> createScene()
 int main(int argc, char* argv[])
 {
     QGuiApplication app(argc, argv);
-    Qt3DExtras::Qt3DWindow view;
 
-    //Qt3DCore::QEntity *scene = createScene();s
+    Qt3DCore::QEntity* rootEntity = new Qt3DCore::QEntity ;
 
-    Qt3DCore::QEntity *global= new Qt3DCore::QEntity;
+     Qt3DExtras::Qt3DWindow* view = new Qt3DExtras::Qt3DWindow;;
+    QVector<QVector<Joint>> skeletonData= createScene();
+    QVector<SkeletonBuilder*> test;
 
 
-
-    //myTimer.getRoot()->setParent(rootEntity);
-
-    QVector<QVector<Joint>> skeletondata = createScene();
-    SkeletonBuilder *skeletonBuilder = new SkeletonBuilder(skeletondata);
-    //myTimer->setBase(skeletonBuilder->build());
-    /*
-    for(int i=0; i<skeletonBuilder->build().size() ; i++)
+    for(int i = 0 ; i< 218; i++)
     {
-        Qt3DCore::QEntity *rootEntity = new Qt3DCore::QEntity(global);
-        MyTimer *myTimer = new MyTimer( rootEntity,skeletonBuilder->build().at(i));
+       Qt3DCore::QEntity *tamp = new Qt3DCore::QEntity;
+       SkeletonBuilder* sb = new SkeletonBuilder(skeletonData,i,tamp);
+       test.append(sb);
     }
-    */
-    qDebug() << skeletondata.size() << Qt::endl;
-    for(int i=0; i<skeletondata.size()  ; i++)
-    {
-        Qt3DCore::QEntity *rootEntity = new Qt3DCore::QEntity(global);
-        MyTimer *myTimer = new MyTimer( rootEntity,skeletondata.at(i));
-    }
-    /*
-    Qt3DCore::QEntity *rootEntity = new Qt3DCore::QEntity(global);
-    Qt3DCore::QEntity *rootEntity1 = new Qt3DCore::QEntity(global);
-    Qt3DCore::QEntity *rootEntity2 = new Qt3DCore::QEntity(global);
 
-    MyTimer *myTimer = new MyTimer( rootEntity,skeletonBuilder->build().at(0));
-    MyTimer *myTimer1 = new MyTimer( rootEntity1,skeletonBuilder->build().at(1));
-    MyTimer *myTimer2 = new MyTimer( rootEntity2,skeletonBuilder->build().at(2));
-    */
-    //myTimer->startTimer();
-    //
-    //myTimer->setRoot(rootEntity);
+    MyTimer *myTimer = new MyTimer( new Qt3DCore::QEntity,test);
 
-    //qDebug() << "RootTimmer : "<<myTimer->getRoot()->components().at(0);
-
-
-
-    // Camera
-    Qt3DRender::QCamera *camera = view.camera();
+    Qt3DRender::QCamera *camera = view->camera();
     camera->lens()->setPerspectiveProjection(45.0f, 16.0f/9.0f, 0.1f, 1000.0f);
     camera->setPosition(QVector3D(0, 0, 40.0f));
     camera->setViewCenter(QVector3D(0, 0, 0));
 
     // For camera controls
-    Qt3DExtras::QOrbitCameraController *camController = new Qt3DExtras::QOrbitCameraController(global);
+    Qt3DExtras::QOrbitCameraController *camController = new Qt3DExtras::QOrbitCameraController(myTimer->getRoot());
     camController->setLinearSpeed( 50.0f );
     camController->setLookSpeed( 180.0f );
     camController->setCamera(camera);
 
-    view.setRootEntity(global);
+
+    view->setRootEntity(myTimer->getRoot());
 
     //view.hide();
-    view.show();
-
-
-
+    view->show();
 
     return app.exec();
 }

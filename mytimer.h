@@ -20,6 +20,7 @@
 #include <QRandomGenerator>
 #include <qglobal.h>
 #include"joint.h"
+#include"skeletonbuilder.h"
 
 class MyTimer : public QObject
 {
@@ -27,23 +28,36 @@ class MyTimer : public QObject
 
 public:
     MyTimer( Qt3DCore::QEntity* root , QVector<Joint> _Current);
+    MyTimer( Qt3DCore::QEntity* root , QVector<SkeletonBuilder*> _CurrentBuilder);
     QTimer *timer;
 
     Qt3DCore::QEntity* getRoot();
     void setRoot(Qt3DCore::QEntity* _a);
     void setBase(QVector<Joint> _base);
     QVector<Joint> getBase();
-    void setI(int* _i);
-    int* getI();
+    void setI(int _i);
+    int getI();
      void myslot(QVector<Joint> Current );
+      Qt3DCore::QEntity* myslot(QVector<SkeletonBuilder*> _CurrentBuilder);
      void startTimer();
+
+    QVector<SkeletonBuilder*> getSkeletonBuilder();
+    void setSkeletonBuilder(QVector<SkeletonBuilder*>   _CurrentBuilder);
+
+    void deleteChildrenRecursively(Qt3DCore::QNodeVector& vector);
+    void delete_entity_recursively(Qt3DCore::QNode *node);
 
 private:
     QVector<Joint> current;
-    int* i ;
+    int i ;
     Qt3DCore::QEntity* _root;
     QVector<Joint> spineBase;
+
+    QVector<Qt3DCore::QEntity> entites;
+
+    QVector<SkeletonBuilder*> CurrentBuilder;
 public slots:
+    void threadSkeletonbuild();
 
     void threadbuild();
 };

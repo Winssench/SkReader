@@ -2,7 +2,7 @@
     error( "Couldn't find the examples.pri file!" )
 }
 
-QT += 3dcore 3drender 3dinput 3dextras
+QT += 3dcore 3drender 3dinput 3dextras widgets
 
 SOURCES += \
     joint.cpp \
@@ -10,14 +10,16 @@ SOURCES += \
     mytimer.cpp \
     orbittransformcontroller.cpp \
     skeleton.cpp \
-    skeletonbuilder.cpp
+    skeletonbuilder.cpp \
+    skeletonview.cpp
 
 HEADERS += \
     joint.h \
     mytimer.h \
     orbittransformcontroller.h \
     skeleton.h \
-    skeletonbuilder.h
+    skeletonbuilder.h \
+    skeletonview.h
 
 DISTFILES += \
     skeleton.csv
